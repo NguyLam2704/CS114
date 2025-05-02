@@ -5,6 +5,9 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, confusion_matrix
 import joblib
+from models.softmax_model import SoftmaxRegression
+from sklearn.model_selection import train_test_split
+import os
 
 def load_data(X_path, y_path):
     X = pd.read_csv(X_path)
@@ -42,15 +45,42 @@ def train_model(X, y):
 
     # Đánh giá
     print("=== Classification Report ===")
-    print(classification_report(y_test, y_pred))
+    print(classification_report(y_test, y_pred, zero_division=0))
 
     print("=== Confusion Matrix ===")
     print(confusion_matrix(y_test, y_pred))
 
     return best_model
 
-def save_model(model, path='elasticnet_model.pkl'):
+def save_model(model, path):
+    # Tạo thư mục nếu chưa tồn tại
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    
+    # Lưu model vào file
     joblib.dump(model, path)
+    
+
+def train_model_softmax(X, y):
+    # Tách dữ liệu
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42, stratify=y
+    )
+
+    # Huấn luyện
+    model = SoftmaxRegression(learning_rate=0.1, epochs=1000)
+    model.fit(X_train.to_numpy(), y_train.to_numpy())
+
+    # Dự đoán
+    y_pred = model.predict(X_test.to_numpy())
+
+    # Đánh giá
+    print("\n=== Classification Report ===")
+    print(classification_report(y_test, y_pred, zero_division=0))
+
+    print("\n=== Confusion Matrix ===")
+    print(confusion_matrix(y_test, y_pred))
+
+    return model
 
 if __name__ == "__main__":
     # Load dữ liệu đã xử lý
@@ -58,8 +88,12 @@ if __name__ == "__main__":
 
     # Train model
     model = train_model(X, y)
+    
+    # Train model Softmax
+    model_softmax = train_model_softmax(X, y)
 
     # Lưu model
-    save_model(model)
+    save_model(model, 'saved_models/elasticnet_model.pkl')
+    save_model(model_softmax, 'saved_models/softmax_model.pkl')
 
     print("\n✅ Model đã train và lưu thành công!")
