@@ -1,7 +1,7 @@
 # main.py
 
 from preprocessing import preprocess_data
-from model import train_model, save_model, train_model_softmax
+from model import train_model, save_model, train_model_softmax, train_model_softmax_lib
 import pandas as pd
 
 if __name__ == "__main__":
@@ -23,9 +23,13 @@ if __name__ == "__main__":
     
     print("\n🔵 Đang train model với Softmax Regression...")
     model_softmax = train_model_softmax(X_final_scaled, y_processed)
+    
+    print("\n🔵 Đang train model với Softmax Regression (thư viện)...")
+    model_softmax_lib = train_model_softmax_lib(X_final_scaled, y_processed)
 
     # --- Bước 3: Lưu model ---
     save_model(model, 'saved_models/elasticnet_model.pkl')
     save_model(model_softmax, 'saved_models/softmax_model.pkl')
+    save_model(model_softmax_lib, 'saved_models/softmax_lib_model.pkl')
 
     print("\n🎯 Quá trình train và lưu model đã hoàn thành!")

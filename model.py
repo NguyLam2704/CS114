@@ -8,6 +8,7 @@ import joblib
 from models.softmax_model import SoftmaxRegression
 from sklearn.model_selection import train_test_split
 import os
+from models.softmax_lib_model import SoftmaxLibModel
 
 def load_data(X_path, y_path):
     X = pd.read_csv(X_path)
@@ -82,6 +83,29 @@ def train_model_softmax(X, y):
 
     return model
 
+def train_model_softmax_lib(X, y):
+    # Tách dữ liệu
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42, stratify=y
+    )
+
+    # Huấn luyện
+    model = SoftmaxLibModel(max_iter=1000)
+    model.train(X_train, y_train)
+
+    # Dự đoán
+    y_pred = model.predict(X_test)
+    
+    # Đánh giá
+    print("\n=== Classification Report ===")
+    print(classification_report(y_test, y_pred, zero_division=0))
+    
+    print("\n=== Confusion Matrix ===")
+    print(confusion_matrix(y_test, y_pred))
+
+    return model
+
+
 if __name__ == "__main__":
     # Load dữ liệu đã xử lý
     X, y = load_data("X_final_scaled.csv", "y_processed.csv")
@@ -91,9 +115,13 @@ if __name__ == "__main__":
     
     # Train model Softmax
     model_softmax = train_model_softmax(X, y)
+    
+    # Train model Softmax với thư viện
+    model_softmax_lib = train_model_softmax_lib(X, y)
 
     # Lưu model
     save_model(model, 'saved_models/elasticnet_model.pkl')
     save_model(model_softmax, 'saved_models/softmax_model.pkl')
+    save_model(model_softmax_lib, 'saved_models/softmax_lib_model.pkl')
 
     print("\n✅ Model đã train và lưu thành công!")
