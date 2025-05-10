@@ -9,7 +9,8 @@ from models.softmax_model import SoftmaxRegression
 from sklearn.model_selection import train_test_split
 import os
 from models.softmax_lib_model import SoftmaxLibModel
-
+from models.knn_lib_model import KnnLibModel
+from models.knn_model import KnnModel
 def load_data(X_path, y_path):
     X = pd.read_csv(X_path)
     y = pd.read_csv(y_path).squeeze()  # y thường chỉ có 1 cột nên dùng squeeze()
@@ -105,7 +106,47 @@ def train_model_softmax_lib(X, y):
 
     return model
 
+def train_model_knn_lib(X, y):
+    # Tách dữ liệu 
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42, stratify=y
+    )
 
+    # Huấn luyện
+    model = KnnLibModel(n_neighbors=5, weights='uniform', p=2)
+    model.train(X_train, y_train)
+
+    # Dự đoán
+    y_pred = model.predict(X_test)
+
+    # Đánh giá
+    print("\n=== Classification Report ===")
+    print(classification_report(y_test, y_pred, zero_division=0))
+
+    print("\n=== Confusion Matrix ===")
+    print(confusion_matrix(y_test, y_pred))
+
+    return model
+
+def train_model_knn(X, y):
+
+    # Tách dữ liệu
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42, stratify=y
+    )
+    # Huấn luyện
+    model = KnnModel(k=5)
+    model.fit(X_train, y_train)
+
+    # Dự đoán
+    y_pred = model.predict(X_test)
+    # Đánh giá
+    print("\n=== Classification Report ===")
+    print(classification_report(y_test, y_pred, zero_division=0))
+    print("\n=== Confusion Matrix ===")
+    print(confusion_matrix(y_test, y_pred))
+    
+    return model
 if __name__ == "__main__":
     # Load dữ liệu đã xử lý
     X, y = load_data("X_final_scaled.csv", "y_processed.csv")
@@ -119,9 +160,16 @@ if __name__ == "__main__":
     # Train model Softmax với thư viện
     model_softmax_lib = train_model_softmax_lib(X, y)
 
+    # Train model KNN với thư viện
+    model_knn_lib = train_model_knn_lib(X, y)
+
+    # Train model KNN
+    model_knn = train_model_knn(X, y)
+
     # Lưu model
     save_model(model, 'saved_models/elasticnet_model.pkl')
     save_model(model_softmax, 'saved_models/softmax_model.pkl')
     save_model(model_softmax_lib, 'saved_models/softmax_lib_model.pkl')
-
+    save_model(model_knn, 'saved_models/knn_model.pkl')
+    save_model(model_knn_lib, 'saved_models/knn_lib_model.pkl')
     print("\n✅ Model đã train và lưu thành công!")
