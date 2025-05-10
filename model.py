@@ -9,34 +9,32 @@ from models.softmax_model import SoftmaxRegression
 from sklearn.model_selection import train_test_split
 import os
 from models.softmax_lib_model import SoftmaxLibModel
+import models.randomforest_model as RFModel
+from balancing import split_and_smote
+from preprocessing import preprocess_data
+from imblearn.over_sampling import SMOTE
+
 
 def load_data(X_path, y_path):
     X = pd.read_csv(X_path)
     y = pd.read_csv(y_path).squeeze()  # y thường chỉ có 1 cột nên dùng squeeze()
     return X, y
 
-def train_model(X, y):
-    # Chia tập train/test
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42, stratify=y
-    )
 
+def train_model(X_train, X_test, y_train, y_test):
     # Khởi tạo model Logistic Regression với ElasticNet penalty
     model = LogisticRegression(
-        penalty='elasticnet',
-        solver='saga',
+        penalty="elasticnet",
+        solver="saga",
         l1_ratio=0.5,
         max_iter=10000,
-        random_state=42
+        random_state=42,
     )
 
     # Grid Search để tìm tham số tốt hơn (tuỳ chọn)
-    param_grid = {
-        'C': [0.01, 0.1, 1, 10],
-        'l1_ratio': [0.2, 0.5, 0.8]
-    }
+    param_grid = {"C": [0.01, 0.1, 1, 10], "l1_ratio": [0.2, 0.5, 0.8]}
 
-    grid_search = GridSearchCV(model, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
+    grid_search = GridSearchCV(model, param_grid, cv=5, scoring="accuracy", n_jobs=-1)
     grid_search.fit(X_train, y_train)
 
     best_model = grid_search.best_estimator_
@@ -53,20 +51,16 @@ def train_model(X, y):
 
     return best_model
 
+
 def save_model(model, path):
     # Tạo thư mục nếu chưa tồn tại
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    
+
     # Lưu model vào file
     joblib.dump(model, path)
-    
 
-def train_model_softmax(X, y):
-    # Tách dữ liệu
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42, stratify=y
-    )
 
+def train_model_softmax(X_train, X_test, y_train, y_test):
     # Huấn luyện
     model = SoftmaxRegression(learning_rate=0.1, epochs=1000)
     model.fit(X_train.to_numpy(), y_train.to_numpy())
@@ -83,45 +77,70 @@ def train_model_softmax(X, y):
 
     return model
 
-def train_model_softmax_lib(X, y):
-    # Tách dữ liệu
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42, stratify=y
-    )
 
+def train_model_softmax_lib(X_train, X_test, y_train, y_test):
     # Huấn luyện
     model = SoftmaxLibModel(max_iter=1000)
     model.train(X_train, y_train)
 
     # Dự đoán
     y_pred = model.predict(X_test)
-    
+
     # Đánh giá
     print("\n=== Classification Report ===")
     print(classification_report(y_test, y_pred, zero_division=0))
-    
+
     print("\n=== Confusion Matrix ===")
     print(confusion_matrix(y_test, y_pred))
 
     return model
 
 
-if __name__ == "__main__":
-    # Load dữ liệu đã xử lý
-    X, y = load_data("X_final_scaled.csv", "y_processed.csv")
+def train_model_random_forest(X_train, X_test, y_train, y_test):
+    # train model
+    model = RFModel.RandomForest(n_trees=10, max_depth=5)
+    model.fit(X_train, y_train)
 
-    # Train model
-    model = train_model(X, y)
-    
+    y_pred = model.predict(X_test)
+
+    print("\n=== Classification Report ===")
+    print(classification_report(y_test, y_pred))
+
+    print("\n=== Confusion Matrix ===")
+    print(confusion_matrix(y_test, y_pred))
+    return model
+
+
+if __name__ == "__main__":
+    # Load dữ liệu
+    df = pd.read_csv("C:/Project/ML/doan/CS114/kidney_disease_dataset.csv")
+    X_final_scaled, y_processed = preprocess_data(df)
+
+    # Chia train/test và áp dụng SMOTE
+    X_train_bal, X_test, y_train_bal, y_test = split_and_smote(
+        X_final_scaled, y_processed
+    )
+
+    # Huấn luyện mô hình Elasticnet
+    model = train_model(X_train_bal, X_test, y_train_bal, y_test)
+
     # Train model Softmax
-    model_softmax = train_model_softmax(X, y)
-    
+    model_softmax = train_model_softmax(X_train_bal, X_test, y_train_bal, y_test)
+
     # Train model Softmax với thư viện
-    model_softmax_lib = train_model_softmax_lib(X, y)
+    model_softmax_lib = train_model_softmax_lib(
+        X_train_bal, X_test, y_train_bal, y_test
+    )
+
+    # Train XGBoost model
+    model_randomforest = train_model_random_forest(
+        X_train_bal, X_test, y_train_bal, y_test
+    )
 
     # Lưu model
-    save_model(model, 'saved_models/elasticnet_model.pkl')
-    save_model(model_softmax, 'saved_models/softmax_model.pkl')
-    save_model(model_softmax_lib, 'saved_models/softmax_lib_model.pkl')
+    save_model(model, "saved_models/elasticnet_model.pkl")
+    save_model(model_softmax, "saved_models/softmax_model.pkl")
+    save_model(model_softmax_lib, "saved_models/softmax_lib_model.pkl")
+    save_model(model_randomforest, "saved_models/XGBoost_model.pkl")
 
     print("\n✅ Model đã train và lưu thành công!")
