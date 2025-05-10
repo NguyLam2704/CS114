@@ -121,12 +121,12 @@ export default function AssessmentPage() {
           </p>
         </div>
 
-        <Card className="w-full max-w-5xl mx-auto shadow-lg border-slate-200 dark:border-slate-800">
+        <Card className="w-full max-w-5xl mx-auto shadow-lg border-slate-200 dark:border-slate-800 p-0">
           <CardHeader className="bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-t-lg">
             <div className="flex items-center gap-3">
               <Heart className="h-6 w-6" />
               <div>
-                <CardTitle className="text-2xl font-bold">
+                <CardTitle className="text-2xl font-bold mt-4">
                   Patient Assessment Form
                 </CardTitle>
                 <CardDescription className="text-teal-100">
