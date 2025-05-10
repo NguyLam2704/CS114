@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder, StandardScaler, PolynomialFeatures
 from sklearn.feature_selection import mutual_info_classif
-
+import pickle
 def preprocess_data(df, target_column='Target', top_k_features=5, random_state=42):
     # Bước 1: Loại bỏ các dòng thiếu target
     df = df.dropna(subset=[target_column])
@@ -25,16 +25,23 @@ def preprocess_data(df, target_column='Target', top_k_features=5, random_state=4
     mi_series = pd.Series(mi_scores, index=X_encoded.columns).sort_values(ascending=False)
     
     top_features = mi_series.head(top_k_features).index.tolist()
+
+    # Save expected columns
+    with open("expected_columns.pkl", "wb") as f:
+        pickle.dump(top_features, f)
     
     # Bước 6: Chuẩn hóa các đặc trưng
+    X_encoded = X_encoded[top_features]
     scaler = StandardScaler()
     X_scaled = pd.DataFrame(scaler.fit_transform(X_encoded), columns=X_encoded.columns)
-    
+
+    with open("scaler1.pkl", "wb") as f:
+        pickle.dump(scaler, f)
     # Bước 7: Tạo các đặc trưng tương tác
     X_selected = X_scaled[top_features]
     poly = PolynomialFeatures(degree=2, interaction_only=True, include_bias=False)
     X_interaction = poly.fit_transform(X_selected)
-    
+
     interaction_columns = poly.get_feature_names_out(input_features=top_features)
     X_interaction_df = pd.DataFrame(X_interaction, columns=interaction_columns)
     
@@ -47,6 +54,14 @@ def preprocess_data(df, target_column='Target', top_k_features=5, random_state=4
     # Bước 9: Chuẩn hóa lại toàn bộ tập dữ liệu
     X_final_scaled = pd.DataFrame(scaler.fit_transform(X_processed), columns=X_processed.columns)
     
+    with open("scaler2.pkl", "wb") as f:
+        pickle.dump(scaler, f)
+
+    with open("poly.pkl", "wb") as f:
+        pickle.dump(poly, f)
+
+    with open("le_target.pkl", "wb") as f:
+        pickle.dump(le_target,f)
     return X_final_scaled, y
 
 # Nếu muốn test nhanh:
