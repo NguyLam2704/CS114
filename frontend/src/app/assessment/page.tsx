@@ -71,27 +71,14 @@ export default function AssessmentPage() {
       appetite: "",
       pedalEdema: "",
       anemia: "",
+      physicalActivity: "",
+      familyHistory: "",
     },
   });
+  // console.log(form.formState.errors);
 
-  function onSubmit(values: FormValues) {
+  async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
-
-    // Simulate API call
-    setTimeout(() => {
-      console.log("Form Data Submitted:", values);
-      // Add logic to send data to the backend for prediction
-
-      toast.success("Analysis completed successfully!", {
-        description: "Patient data has been processed and prediction is ready.",
-        action: {
-          label: "View Results",
-          onClick: () => console.log("View results clicked"),
-        },
-      });
-
-      setIsSubmitting(false);
-    }, 2000);
   }
 
   const handleTabChange = (value: string) => {

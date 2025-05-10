@@ -55,6 +55,12 @@ export const formSchema = z.object({
   appetite: z.string().min(1, { message: "Appetite status is required" }),
   pedalEdema: z.string().min(1, { message: "Pedal edema status is required" }),
   anemia: z.string().min(1, { message: "Anemia status is required" }),
+  physicalActivity: z
+    .string()
+    .min(1, { message: "Physical activity status is required" }),
+  familyHistory: z
+    .string()
+    .min(1, { message: "Family history status is required" }),
 });
 
 export type FormValues = z.infer<typeof formSchema>;
@@ -75,15 +81,17 @@ export interface KidneyFormValues {
   sodium: string;
   potassium: string;
   hemoglobin: string;
-  packedCellVolume: string;
+  packedCellVolume: string; // get yes/no
   whiteBloodCellCount: string;
   redBloodCellCount: string;
   hypertension: string;
-  diabetesMellitus: string;
-  coronaryArteryDisease: string;
+  diabetesMellitus: string; // get yes/no
+  coronaryArteryDisease: string; // get yes/no
   appetite: string;
   pedalEdema: string;
   anemia: string;
+  physicalActivity: string; //get
+  familyHistory: string; // get yes/no
 }
 
 export interface DemographicsFormValues {
