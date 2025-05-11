@@ -39,7 +39,7 @@ export function FormSection({
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">{children}</div>
       {showNextButton && onNext && (
-        <div className="flex justify-end mt-6">
+        <div className="flex justify-end mt-6 mb-4">
           <Button type="button" onClick={onNext} className={buttonColorClass}>
             Next Step
             <ArrowRight className="ml-2 h-4 w-4" />

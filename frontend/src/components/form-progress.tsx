@@ -6,5 +6,5 @@ interface FormProgressProps {
 }
 
 export function FormProgress({ value, className }: FormProgressProps) {
-  return <Progress value={value} className={`h-2 mt-4 ${className}`} />
+  return <Progress value={value} className={`h-2 mt-4 ${className || ""}`} aria-label="Form completion progress" />
 }

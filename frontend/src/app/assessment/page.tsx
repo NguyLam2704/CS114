@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Toaster, toast } from "sonner";
+import { Toaster } from "sonner";
 import { Heart } from "lucide-react";
 import { FormProgress } from "@/components/form-progress";
 import { DemographicsSection } from "@/components/demographics-section";
@@ -50,48 +50,49 @@ export default function AssessmentPage() {
       age: "",
       bloodPressure: "",
       specificGravity: "",
-      albumin: "",
       sugar: "",
-      redBloodCells: "",
-      pusCell: "",
-      pusCellClumps: "",
-      bacteria: "",
+      // redBloodCells: "",
+      // pusCell: "",
+      // pusCellClumps: "",
+      // bacteria: "",
       bloodGlucoseRandom: "",
-      bloodUrea: "",
-      serumCreatinine: "",
-      sodium: "",
-      potassium: "",
+      // bloodUrea: "",
+      // serumCreatinine: "",
+      // sodium: "",
+      // potassium: "",
       hemoglobin: "",
       packedCellVolume: "",
-      whiteBloodCellCount: "",
-      redBloodCellCount: "",
-      hypertension: "",
+      // whiteBloodCellCount: "",
+      // redBloodCellCount: "",
+      // hypertension: "",
       diabetesMellitus: "",
       coronaryArteryDisease: "",
       appetite: "",
       pedalEdema: "",
       anemia: "",
+      physicalActivity: "",
+      familyHistory: "",
     },
   });
 
-  function onSubmit(values: FormValues) {
+  function onSubmit() {
     setIsSubmitting(true);
 
     // Simulate API call
-    setTimeout(() => {
-      console.log("Form Data Submitted:", values);
-      // Add logic to send data to the backend for prediction
+    // setTimeout(() => {
+    //   console.log("Form Data Submitted:", values);
+    //   // Add logic to send data to the backend for prediction
 
-      toast.success("Analysis completed successfully!", {
-        description: "Patient data has been processed and prediction is ready.",
-        action: {
-          label: "View Results",
-          onClick: () => console.log("View results clicked"),
-        },
-      });
+    //   toast.success("Analysis completed successfully!", {
+    //     description: "Patient data has been processed and prediction is ready.",
+    //     action: {
+    //       label: "View Results",
+    //       onClick: () => console.log("View results clicked"),
+    //     },
+    //   });
 
-      setIsSubmitting(false);
-    }, 2000);
+    //   setIsSubmitting(false);
+    // }, 2000);
   }
 
   const handleTabChange = (value: string) => {
@@ -121,12 +122,12 @@ export default function AssessmentPage() {
           </p>
         </div>
 
-        <Card className="w-full max-w-5xl mx-auto shadow-lg border-slate-200 dark:border-slate-800">
+        <Card className="w-full max-w-5xl mx-auto shadow-lg border-slate-200 dark:border-slate-800 p-0">
           <CardHeader className="bg-gradient-to-r from-teal-600 to-cyan-600 text-white rounded-t-lg">
             <div className="flex items-center gap-3">
               <Heart className="h-6 w-6" />
               <div>
-                <CardTitle className="text-2xl font-bold">
+                <CardTitle className="text-2xl font-bold mt-4">
                   Patient Assessment Form
                 </CardTitle>
                 <CardDescription className="text-teal-100">

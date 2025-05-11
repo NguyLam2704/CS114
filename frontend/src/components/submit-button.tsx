@@ -10,7 +10,7 @@ interface SubmitButtonProps {
 
 export function SubmitButton({ isSubmitting, text, loadingText, className }: SubmitButtonProps) {
   return (
-    <Button type="submit" disabled={isSubmitting} className={`min-w-[180px] ${className}`}>
+    <Button type="submit" disabled={isSubmitting} className={className}>
       {isSubmitting ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
