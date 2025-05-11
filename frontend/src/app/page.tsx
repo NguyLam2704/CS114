@@ -14,7 +14,6 @@ import {
 import { Form } from "@/components/ui/form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Toaster } from "@/components/ui/toaster";
-import { toast } from "sonner";
 import { Heart } from "lucide-react";
 import { FormProgress } from "@/components/form-progress";
 import { DemographicsSection } from "@/components/demographics-section";
@@ -23,12 +22,18 @@ import { BloodTestsSection } from "@/components/blood-tests-section";
 import { MedicalHistorySection } from "@/components/medical-history-section";
 import { SymptomsSection } from "@/components/symptoms-section";
 import { SubmitButton } from "@/components/submit-button";
+import { PredictionResultDialog } from "@/components/prediction-result-dialog";
 import { formSchema, type FormValues } from "@/types/form-types";
 
+// Update the component to include state for the prediction result and dialog
 export default function AssessmentPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeTab, setActiveTab] = useState("demographics");
   const [progress, setProgress] = useState(0);
+  const [predictionResult, setPredictionResult] = useState<
+    "No_Disease" | "Low_Risk" | "Moderate_Risk" | "High_Risk" | null
+  >(null);
+  const [isResultDialogOpen, setIsResultDialogOpen] = useState(false);
 
   const tabs = [
     "demographics",
@@ -51,22 +56,22 @@ export default function AssessmentPage() {
       age: "",
       bloodPressure: "",
       specificGravity: "",
-      albumin: "",
+      // albumin: "",
       sugar: "",
-      redBloodCells: "",
-      pusCell: "",
-      pusCellClumps: "",
-      bacteria: "",
+      // redBloodCells: "",
+      // pusCell: "",
+      // pusCellClumps: "",
+      // bacteria: "",
       bloodGlucoseRandom: "",
-      bloodUrea: "",
-      serumCreatinine: "",
-      sodium: "",
-      potassium: "",
+      // bloodUrea: "",
+      // serumCreatinine: "",
+      // sodium: "",
+      // potassium: "",
       hemoglobin: "",
       packedCellVolume: "",
-      whiteBloodCellCount: "",
-      redBloodCellCount: "",
-      hypertension: "",
+      // whiteBloodCellCount: "",
+      // redBloodCellCount: "",
+      // hypertension: "",
       diabetesMellitus: "",
       coronaryArteryDisease: "",
       appetite: "",
@@ -77,21 +82,56 @@ export default function AssessmentPage() {
     },
   });
 
-  function onSubmit(values: FormValues) {
+  async function onSubmit(values: FormValues) {
     setIsSubmitting(true);
+    try {
+      const response = await fetch("http://127.0.0.1:5000/api/predict", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          coronary_artery_disease: values.coronaryArteryDisease,
+          diabetes_mellitus: values.diabetesMellitus,
+          packed_cell_volume: Number(values.packedCellVolume),
+          physical_activity_level: values.physicalActivity,
+          family_history_of_chronic_kidney_disease: values.familyHistory,
+        }),
+      });
 
-    // Simulate API call
-    setTimeout(() => {
-      console.log("Form Data Submitted:", values);
-      // Add logic to send data to the backend for prediction
+      if (!response.ok) {
+        throw new Error("Failed to fetch prediction");
+      }
 
+      const data = await response.json();
+      console.log("Prediction result:", data);
+
+      // For testing purposes, you can randomize the result
+      // const results = ["No_Disease", "Low_Risk", "Moderate_Risk", "HighRisk"];
+      // const randomResult = results[Math.floor(Math.random() * results.length)];
+      // setPredictionResult(randomResult as any);
+
+      // Set the actual prediction result
+      setPredictionResult(data.prediction);
+
+      // Show the result dialog
+      setIsResultDialogOpen(true);
+
+      // Also show a toast notification
       // toast({
-      //   message: "Analysis completed successfully!",
-      //   description: "Patient data has been processed and prediction is ready.",
+      //   title: "Assessment Complete",
+      //   description: "View the detailed results in the dialog",
       // });
-
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      // toast({
+      //   variant: "destructive",
+      //   title: "Submission Failed",
+      //   description: "Failed to submit form. Please try again.",
+      // });
+    } finally {
       setIsSubmitting(false);
-    }, 2000);
+    }
   }
 
   const handleTabChange = (value: string) => {
@@ -106,6 +146,10 @@ export default function AssessmentPage() {
       setActiveTab(nextTab);
       updateProgress(nextTab);
     }
+  };
+
+  const closeResultDialog = () => {
+    setIsResultDialogOpen(false);
   };
 
   return (
@@ -222,6 +266,19 @@ export default function AssessmentPage() {
           </Form>
         </Card>
       </div>
+
+      {/* Prediction Result Dialog */}
+      <PredictionResultDialog
+        isOpen={isResultDialogOpen}
+        onClose={closeResultDialog}
+        prediction={predictionResult}
+        patientName={
+          form.getValues().age
+            ? `Patient (${form.getValues().age} years)`
+            : "Patient"
+        }
+      />
+
       <Toaster />
     </div>
   );

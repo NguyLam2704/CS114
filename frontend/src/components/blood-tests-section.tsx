@@ -1,16 +1,23 @@
-"use client"
+"use client";
 
-import { CardContent } from "@/components/ui/card"
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { ChevronRight } from "lucide-react"
-import type { UseFormReturn } from "react-hook-form"
-import type { FormValues } from "@/types/form-types"
+import { CardContent } from "@/components/ui/card";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
+import type { UseFormReturn } from "react-hook-form";
+import type { FormValues } from "@/types/form-types";
 
 interface BloodTestsSectionProps {
-  form: UseFormReturn<FormValues>
-  onNext: () => void
+  form: UseFormReturn<FormValues>;
+  onNext: () => void;
 }
 
 export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
@@ -33,7 +40,7 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
             )}
           />
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="bloodUrea"
             render={({ field }) => (
@@ -46,9 +53,9 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="serumCreatinine"
             render={({ field }) => (
@@ -61,9 +68,9 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="sodium"
             render={({ field }) => (
@@ -76,9 +83,9 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="potassium"
             render={({ field }) => (
@@ -91,7 +98,7 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
           <FormField
             control={form.control}
@@ -122,7 +129,7 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
             )}
           />
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="whiteBloodCellCount"
             render={({ field }) => (
@@ -135,9 +142,9 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="redBloodCellCount"
             render={({ field }) => (
@@ -150,7 +157,7 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
         </div>
       </CardContent>
       <div className="flex justify-end p-6 border-t">
@@ -163,5 +170,5 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
         </Button>
       </div>
     </div>
-  )
+  );
 }

@@ -1,20 +1,28 @@
-"use client"
+"use client";
 
-import { CardContent } from "@/components/ui/card"
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Button } from "@/components/ui/button"
-import { ChevronRight } from "lucide-react"
-import type { UseFormReturn } from "react-hook-form"
-import type { FormValues } from "@/types/form-types"
+import { CardContent } from "@/components/ui/card";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
+import type { UseFormReturn } from "react-hook-form";
+import type { FormValues } from "@/types/form-types";
 
 interface UrineAnalysisSectionProps {
-  form: UseFormReturn<FormValues>
-  onNext: () => void
+  form: UseFormReturn<FormValues>;
+  onNext: () => void;
 }
 
-export function UrineAnalysisSection({ form, onNext }: UrineAnalysisSectionProps) {
+export function UrineAnalysisSection({
+  form,
+  onNext,
+}: UrineAnalysisSectionProps) {
   return (
     <div>
       <CardContent className="space-y-4 pt-6">
@@ -33,7 +41,7 @@ export function UrineAnalysisSection({ form, onNext }: UrineAnalysisSectionProps
             )}
           />
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="albumin"
             render={({ field }) => (
@@ -45,7 +53,7 @@ export function UrineAnalysisSection({ form, onNext }: UrineAnalysisSectionProps
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
           <FormField
             control={form.control}
@@ -61,7 +69,7 @@ export function UrineAnalysisSection({ form, onNext }: UrineAnalysisSectionProps
             )}
           />
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="redBloodCells"
             render={({ field }) => (
@@ -81,9 +89,9 @@ export function UrineAnalysisSection({ form, onNext }: UrineAnalysisSectionProps
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="pusCell"
             render={({ field }) => (
@@ -103,16 +111,19 @@ export function UrineAnalysisSection({ form, onNext }: UrineAnalysisSectionProps
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="pusCellClumps"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Pus Cell Clumps</FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
@@ -125,16 +136,19 @@ export function UrineAnalysisSection({ form, onNext }: UrineAnalysisSectionProps
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="bacteria"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Bacteria</FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
@@ -147,7 +161,7 @@ export function UrineAnalysisSection({ form, onNext }: UrineAnalysisSectionProps
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
         </div>
       </CardContent>
       <div className="flex justify-end p-6 border-t">
@@ -160,5 +174,5 @@ export function UrineAnalysisSection({ form, onNext }: UrineAnalysisSectionProps
         </Button>
       </div>
     </div>
-  )
+  );
 }

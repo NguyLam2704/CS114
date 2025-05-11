@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Toaster, toast } from "sonner";
+import { Toaster } from "sonner";
 import { Heart } from "lucide-react";
 import { FormProgress } from "@/components/form-progress";
 import { DemographicsSection } from "@/components/demographics-section";
@@ -50,22 +50,21 @@ export default function AssessmentPage() {
       age: "",
       bloodPressure: "",
       specificGravity: "",
-      albumin: "",
       sugar: "",
-      redBloodCells: "",
-      pusCell: "",
-      pusCellClumps: "",
-      bacteria: "",
+      // redBloodCells: "",
+      // pusCell: "",
+      // pusCellClumps: "",
+      // bacteria: "",
       bloodGlucoseRandom: "",
-      bloodUrea: "",
-      serumCreatinine: "",
-      sodium: "",
-      potassium: "",
+      // bloodUrea: "",
+      // serumCreatinine: "",
+      // sodium: "",
+      // potassium: "",
       hemoglobin: "",
       packedCellVolume: "",
-      whiteBloodCellCount: "",
-      redBloodCellCount: "",
-      hypertension: "",
+      // whiteBloodCellCount: "",
+      // redBloodCellCount: "",
+      // hypertension: "",
       diabetesMellitus: "",
       coronaryArteryDisease: "",
       appetite: "",
@@ -75,10 +74,25 @@ export default function AssessmentPage() {
       familyHistory: "",
     },
   });
-  // console.log(form.formState.errors);
 
-  async function onSubmit(values: FormValues) {
+  function onSubmit() {
     setIsSubmitting(true);
+
+    // Simulate API call
+    // setTimeout(() => {
+    //   console.log("Form Data Submitted:", values);
+    //   // Add logic to send data to the backend for prediction
+
+    //   toast.success("Analysis completed successfully!", {
+    //     description: "Patient data has been processed and prediction is ready.",
+    //     action: {
+    //       label: "View Results",
+    //       onClick: () => console.log("View results clicked"),
+    //     },
+    //   });
+
+    //   setIsSubmitting(false);
+    // }, 2000);
   }
 
   const handleTabChange = (value: string) => {

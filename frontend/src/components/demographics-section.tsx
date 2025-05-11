@@ -1,19 +1,29 @@
-"use client"
+"use client";
 
-import { CardContent } from "@/components/ui/card"
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { ChevronRight } from "lucide-react"
-import type { UseFormReturn } from "react-hook-form"
-import type { FormValues } from "@/types/form-types"
+import { CardContent } from "@/components/ui/card";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
+import type { UseFormReturn } from "react-hook-form";
+import type { FormValues } from "@/types/form-types";
 
 interface DemographicsSectionProps {
-  form: UseFormReturn<FormValues>
-  onNext: () => void
+  form: UseFormReturn<FormValues>;
+  onNext: () => void;
 }
 
-export function DemographicsSection({ form, onNext }: DemographicsSectionProps) {
+export function DemographicsSection({
+  form,
+  onNext,
+}: DemographicsSectionProps) {
   return (
     <div>
       <CardContent className="space-y-4 pt-6">
@@ -27,7 +37,7 @@ export function DemographicsSection({ form, onNext }: DemographicsSectionProps) 
                 <FormControl>
                   <Input placeholder="Enter age" {...field} />
                 </FormControl>
-                <FormDescription>Patient's age in years</FormDescription>
+                <FormDescription>Patient&#39;s age in years</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -42,7 +52,9 @@ export function DemographicsSection({ form, onNext }: DemographicsSectionProps) 
                 <FormControl>
                   <Input placeholder="e.g. 120/80" {...field} />
                 </FormControl>
-                <FormDescription>Format: systolic/diastolic (mmHg)</FormDescription>
+                <FormDescription>
+                  Format: systolic/diastolic (mmHg)
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -59,5 +71,5 @@ export function DemographicsSection({ form, onNext }: DemographicsSectionProps) 
         </Button>
       </div>
     </div>
-  )
+  );
 }

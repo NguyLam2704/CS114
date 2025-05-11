@@ -1,31 +1,49 @@
-"use client"
+"use client";
 
-import { CardContent } from "@/components/ui/card"
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Button } from "@/components/ui/button"
-import { ChevronRight } from "lucide-react"
-import type { UseFormReturn } from "react-hook-form"
-import type { FormValues } from "@/types/form-types"
+import { CardContent } from "@/components/ui/card";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
+import type { UseFormReturn } from "react-hook-form";
+import type { FormValues } from "@/types/form-types";
 
 interface MedicalHistorySectionProps {
-  form: UseFormReturn<FormValues>
-  onNext: () => void
+  form: UseFormReturn<FormValues>;
+  onNext: () => void;
 }
 
-export function MedicalHistorySection({ form, onNext }: MedicalHistorySectionProps) {
+export function MedicalHistorySection({
+  form,
+  onNext,
+}: MedicalHistorySectionProps) {
   return (
     <div>
       <CardContent className="space-y-4 pt-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FormField
+          {/* <FormField
             control={form.control}
             name="hypertension"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Hypertension</FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
@@ -38,8 +56,9 @@ export function MedicalHistorySection({ form, onNext }: MedicalHistorySectionPro
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
+          {/* Required */}
           <FormField
             control={form.control}
             name="diabetesMellitus"
@@ -47,7 +66,10 @@ export function MedicalHistorySection({ form, onNext }: MedicalHistorySectionPro
               <FormItem>
                 <FormLabel>Diabetes Mellitus</FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
@@ -62,6 +84,7 @@ export function MedicalHistorySection({ form, onNext }: MedicalHistorySectionPro
             )}
           />
 
+          {/* Required */}
           <FormField
             control={form.control}
             name="coronaryArteryDisease"
@@ -69,7 +92,10 @@ export function MedicalHistorySection({ form, onNext }: MedicalHistorySectionPro
               <FormItem>
                 <FormLabel>Coronary Artery Disease</FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
@@ -84,6 +110,7 @@ export function MedicalHistorySection({ form, onNext }: MedicalHistorySectionPro
             )}
           />
 
+          {/* Required */}
           <FormField
             control={form.control}
             name="familyHistory"
@@ -91,7 +118,10 @@ export function MedicalHistorySection({ form, onNext }: MedicalHistorySectionPro
               <FormItem>
                 <FormLabel>Family History of Kidney Disease</FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
@@ -106,6 +136,7 @@ export function MedicalHistorySection({ form, onNext }: MedicalHistorySectionPro
             )}
           />
 
+          {/* Required */}
           <FormField
             control={form.control}
             name="physicalActivity"
@@ -113,14 +144,17 @@ export function MedicalHistorySection({ form, onNext }: MedicalHistorySectionPro
               <FormItem>
                 <FormLabel>Physical Activity Level</FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="sedentary">Sedentary</SelectItem>
+                      <SelectItem value="low">Low</SelectItem>
                       <SelectItem value="moderate">Moderate</SelectItem>
-                      <SelectItem value="active">Active</SelectItem>
+                      <SelectItem value="high">High</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormControl>
@@ -140,5 +174,5 @@ export function MedicalHistorySection({ form, onNext }: MedicalHistorySectionPro
         </Button>
       </div>
     </div>
-  )
+  );
 }
