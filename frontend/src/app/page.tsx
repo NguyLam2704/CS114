@@ -106,29 +106,13 @@ export default function AssessmentPage() {
       const data = await response.json();
       console.log("Prediction result:", data);
 
-      // For testing purposes, you can randomize the result
-      // const results = ["No_Disease", "Low_Risk", "Moderate_Risk", "HighRisk"];
-      // const randomResult = results[Math.floor(Math.random() * results.length)];
-      // setPredictionResult(randomResult as any);
-
       // Set the actual prediction result
       setPredictionResult(data.prediction);
 
       // Show the result dialog
       setIsResultDialogOpen(true);
-
-      // Also show a toast notification
-      // toast({
-      //   title: "Assessment Complete",
-      //   description: "View the detailed results in the dialog",
-      // });
     } catch (error) {
       console.error("Error submitting form:", error);
-      // toast({
-      //   variant: "destructive",
-      //   title: "Submission Failed",
-      //   description: "Failed to submit form. Please try again.",
-      // });
     } finally {
       setIsSubmitting(false);
     }
@@ -150,6 +134,8 @@ export default function AssessmentPage() {
 
   const closeResultDialog = () => {
     setIsResultDialogOpen(false);
+    // Reset the prediction result when closing the dialog
+    setPredictionResult(null);
   };
 
   return (

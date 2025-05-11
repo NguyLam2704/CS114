@@ -7,6 +7,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -36,6 +37,12 @@ export function UrineAnalysisSection({
                 <FormControl>
                   <Input placeholder="Enter specific gravity" {...field} />
                 </FormControl>
+                <FormDescription>
+                  Measures the concentration of urine, reflecting the kidney’s
+                  ability to concentrate or dilute urine. <br />
+                  Range: <strong>1 – 1.02</strong>
+                </FormDescription>
+
                 <FormMessage />
               </FormItem>
             )}
@@ -64,6 +71,10 @@ export function UrineAnalysisSection({
                 <FormControl>
                   <Input placeholder="Enter sugar value" {...field} />
                 </FormControl>
+                <FormDescription>
+                  Measures glucose in urine. <br />
+                  Range: <strong>0 – 5 mg/dL</strong>
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}

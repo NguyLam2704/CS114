@@ -146,14 +146,11 @@ export function PredictionResultDialog({
           </div>
 
           <div className="flex justify-between gap-4">
-            <Button variant="outline" onClick={handleClose} className="flex-1">
-              Close
-            </Button>
             <Button
               onClick={handleClose}
               className={`flex-1 ${config.actionColor}`}
             >
-              View Full Report
+              Close
             </Button>
           </div>
         </div>

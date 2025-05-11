@@ -34,7 +34,11 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
                 <FormControl>
                   <Input placeholder="Enter value" {...field} />
                 </FormControl>
-                <FormDescription>In mg/dL</FormDescription>
+                <FormDescription>
+                  Blood glucose level measured at any random time in mg/dL.{" "}
+                  <br />
+                  Range: <strong>70–500 mg/dL</strong>.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -109,7 +113,10 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
                 <FormControl>
                   <Input placeholder="Enter value" {...field} />
                 </FormControl>
-                <FormDescription>In g/dL</FormDescription>
+                <FormDescription>
+                  Measured in g/dL. <br />
+                  Range: <strong>6-18 g/dL</strong>.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -124,6 +131,11 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
                 <FormControl>
                   <Input placeholder="Enter value" {...field} />
                 </FormControl>
+                <FormDescription>
+                  A measure of the proportion of blood volume occupied by red
+                  blood cells. <br />
+                  Range: <strong>20-55%</strong>.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}

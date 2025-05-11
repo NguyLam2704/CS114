@@ -1,13 +1,26 @@
-"use client"
+"use client";
 
-import { CardContent } from "@/components/ui/card"
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import type { UseFormReturn } from "react-hook-form"
-import type { FormValues } from "@/types/form-types"
+import { CardContent } from "@/components/ui/card";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  FormDescription,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import type { UseFormReturn } from "react-hook-form";
+import type { FormValues } from "@/types/form-types";
 
 interface SymptomsSectionProps {
-  form: UseFormReturn<FormValues>
+  form: UseFormReturn<FormValues>;
 }
 
 export function SymptomsSection({ form }: SymptomsSectionProps) {
@@ -21,7 +34,10 @@ export function SymptomsSection({ form }: SymptomsSectionProps) {
             <FormItem>
               <FormLabel>Appetite</FormLabel>
               <FormControl>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
@@ -31,6 +47,11 @@ export function SymptomsSection({ form }: SymptomsSectionProps) {
                   </SelectContent>
                 </Select>
               </FormControl>
+              <FormDescription>
+                Appetite refers to the desire to eat food. <br />
+                <strong>Good</strong>: Normal desire to eat. <br />
+                <strong>Poor</strong>: Decreased desire to eat.
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -43,7 +64,10 @@ export function SymptomsSection({ form }: SymptomsSectionProps) {
             <FormItem>
               <FormLabel>Pedal Edema</FormLabel>
               <FormControl>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
@@ -53,6 +77,11 @@ export function SymptomsSection({ form }: SymptomsSectionProps) {
                   </SelectContent>
                 </Select>
               </FormControl>
+              <FormDescription>
+                Pedal edema refers to swelling in the feet and ankles. <br />
+                <strong>Yes</strong>: Swelling present. <br />
+                <strong>No</strong>: No swelling.
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -65,7 +94,10 @@ export function SymptomsSection({ form }: SymptomsSectionProps) {
             <FormItem>
               <FormLabel>Anemia</FormLabel>
               <FormControl>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
@@ -75,11 +107,17 @@ export function SymptomsSection({ form }: SymptomsSectionProps) {
                   </SelectContent>
                 </Select>
               </FormControl>
+              <FormDescription>
+                Anemia refers to a deficiency of red blood cells or hemoglobin.{" "}
+                <br />
+                <strong>Yes</strong>: Anemia present. <br />
+                <strong>No</strong>: No anemia.
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
       </div>
     </CardContent>
-  )
+  );
 }

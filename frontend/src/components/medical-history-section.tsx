@@ -7,6 +7,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import {
   Select,
@@ -79,6 +80,10 @@ export function MedicalHistorySection({
                     </SelectContent>
                   </Select>
                 </FormControl>
+                <FormDescription>
+                  Select "Yes" if you have been diagnosed with diabetes, or "No"
+                  if not.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -105,6 +110,10 @@ export function MedicalHistorySection({
                     </SelectContent>
                   </Select>
                 </FormControl>
+                <FormDescription>
+                  Select "Yes" if you have a history of coronary artery disease,
+                  or "No" if not.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -131,6 +140,10 @@ export function MedicalHistorySection({
                     </SelectContent>
                   </Select>
                 </FormControl>
+                <FormDescription>
+                  Select "Yes" if any of your family members have had kidney
+                  disease, or "No" if none have.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -158,6 +171,16 @@ export function MedicalHistorySection({
                     </SelectContent>
                   </Select>
                 </FormControl>
+                <FormDescription>
+                  Select your level of physical activity. <br />
+                  <strong>Low:</strong> Little or no physical activity (less
+                  than 30 minutes per week). <br />
+                  <strong>Moderate:</strong> Moderate physical activity (around
+                  30–150 minutes per week). <br />
+                  <strong>High:</strong> High or vigorous physical activity
+                  (more than 150 minutes per week).
+                </FormDescription>
+
                 <FormMessage />
               </FormItem>
             )}
