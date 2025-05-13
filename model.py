@@ -9,10 +9,10 @@ from models.softmax_model import SoftmaxRegression
 from sklearn.model_selection import train_test_split
 import os
 from models.softmax_lib_model import SoftmaxLibModel
-import models.randomforest_model as RFModel
-from balancing import split_and_smote
-from preprocessing import preprocess_data
-from imblearn.over_sampling import SMOTE
+from models.randomforest_model import *
+from sklearn.ensemble import RandomForestClassifier
+from models.knn_lib_model import KnnLibModel
+from models.knn_model import KnnModel
 
 
 def load_data(X_path, y_path):
@@ -21,7 +21,12 @@ def load_data(X_path, y_path):
     return X, y
 
 
-def train_model(X_train, X_test, y_train, y_test):
+def train_model(X, y):
+    # Chia tập train/test
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42, stratify=y
+    )
+
     # Khởi tạo model Logistic Regression với ElasticNet penalty
     model = LogisticRegression(
         penalty="elasticnet",
@@ -60,7 +65,12 @@ def save_model(model, path):
     joblib.dump(model, path)
 
 
-def train_model_softmax(X_train, X_test, y_train, y_test):
+def train_model_softmax(X, y):
+    # Tách dữ liệu
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42, stratify=y
+    )
+
     # Huấn luyện
     model = SoftmaxRegression(learning_rate=0.1, epochs=1000)
     model.fit(X_train.to_numpy(), y_train.to_numpy())
@@ -78,7 +88,12 @@ def train_model_softmax(X_train, X_test, y_train, y_test):
     return model
 
 
-def train_model_softmax_lib(X_train, X_test, y_train, y_test):
+def train_model_softmax_lib(X, y):
+    # Tách dữ liệu
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42, stratify=y
+    )
+
     # Huấn luyện
     model = SoftmaxLibModel(max_iter=1000)
     model.train(X_train, y_train)
@@ -96,51 +111,127 @@ def train_model_softmax_lib(X_train, X_test, y_train, y_test):
     return model
 
 
-def train_model_random_forest(X_train, X_test, y_train, y_test):
-    # train model
-    model = RFModel.RandomForest(n_trees=10, max_depth=5)
-    model.fit(X_train, y_train)
+def train_model_knn_lib(X, y):
+    # Tách dữ liệu
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42, stratify=y
+    )
 
+    # Huấn luyện
+    model = KnnLibModel(n_neighbors=5, weights="uniform", p=2)
+    model.train(X_train, y_train)
+
+    # Dự đoán
     y_pred = model.predict(X_test)
 
+    # Đánh giá
     print("\n=== Classification Report ===")
-    print(classification_report(y_test, y_pred))
+    print(classification_report(y_test, y_pred, zero_division=0))
 
     print("\n=== Confusion Matrix ===")
     print(confusion_matrix(y_test, y_pred))
+
+    return model
+
+
+def train_model_knn(X, y):
+
+    # Tách dữ liệu
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42, stratify=y
+    )
+    # Huấn luyện
+    model = KnnModel(k=5)
+    model.fit(X_train, y_train)
+
+    # Dự đoán
+    y_pred = model.predict(X_test)
+    # Đánh giá
+    print("\n=== Classification Report ===")
+    print(classification_report(y_test, y_pred, zero_division=0))
+    print("\n=== Confusion Matrix ===")
+    print(confusion_matrix(y_test, y_pred))
+
+    return model
+
+
+def train_model_lib_RandomForest(X, y):
+
+    # Tách dữ liệu
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, stratify=y, random_state=42
+    )
+
+    # Huấn luyện mô hình
+    model = RandomForestClassifier()
+    model.fit(X_train, y_train)
+
+    # Dự đoán
+    y_pred = model.predict(X_test)
+
+    # Đánh giá
+    print("\n=== Classification Report ===")
+    print(classification_report(y_test, y_pred, zero_division=0))
+    print("\n=== Confusion Matrix ===")
+    print(confusion_matrix(y_test, y_pred))
+
+    return model
+
+
+def train_model_RandomForest(X, y):
+
+    # Tách dữ liệu
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, stratify=y, random_state=42
+    )
+
+    # Huấn luyện mô hình
+    model = RandomForest(n_trees=20, max_depth=10, min_samples_split=10)
+    model.fit(X_train, y_train)
+
+    # Dự đoán
+    y_pred = model.predict(X_test)
+
+    # Đánh giá mô hình
+    print("\n=== Classification Report ===")
+    print(classification_report(y_test, y_pred, zero_division=0))
+    print("\n=== Confusion Matrix ===")
+    print(confusion_matrix(y_test, y_pred))
+
     return model
 
 
 if __name__ == "__main__":
-    # Load dữ liệu
-    df = pd.read_csv("C:/Project/ML/doan/CS114/kidney_disease_dataset.csv")
-    X_final_scaled, y_processed = preprocess_data(df)
+    # Load dữ liệu đã xử lý
+    X, y = load_data("X_final_scaled.csv", "y_processed.csv")
 
-    # Chia train/test và áp dụng SMOTE
-    X_train_bal, X_test, y_train_bal, y_test = split_and_smote(
-        X_final_scaled, y_processed
-    )
-
-    # Huấn luyện mô hình Elasticnet
-    model = train_model(X_train_bal, X_test, y_train_bal, y_test)
+    # Train model
+    model = train_model(X, y)
 
     # Train model Softmax
-    model_softmax = train_model_softmax(X_train_bal, X_test, y_train_bal, y_test)
+    model_softmax = train_model_softmax(X, y)
 
     # Train model Softmax với thư viện
-    model_softmax_lib = train_model_softmax_lib(
-        X_train_bal, X_test, y_train_bal, y_test
-    )
+    model_softmax_lib = train_model_softmax_lib(X, y)
 
-    # Train XGBoost model
-    model_randomforest = train_model_random_forest(
-        X_train_bal, X_test, y_train_bal, y_test
-    )
+    # Train model KNN với thư viện
+    model_knn_lib = train_model_knn_lib(X, y)
+
+    # Train model KNN
+    model_knn = train_model_knn(X, y)
+
+    # Train model Random Forest
+    model_randomforest = train_model_RandomForest(X, y)
+
+    # Train model Random Forest với thư viện
+    model_randomforest_lib = train_model_lib_RandomForest(X, y)
 
     # Lưu model
     save_model(model, "saved_models/elasticnet_model.pkl")
     save_model(model_softmax, "saved_models/softmax_model.pkl")
     save_model(model_softmax_lib, "saved_models/softmax_lib_model.pkl")
-    save_model(model_randomforest, "saved_models/XGBoost_model.pkl")
-
+    save_model(model_knn, "saved_models/knn_model.pkl")
+    save_model(model_knn_lib, "saved_models/knn_lib_model.pkl")
+    save_model(model_randomforest, "saved_models/randomforest_model.pkl")
+    save_model(model_randomforest_lib, "saved_models/randomforst_lib_model.pkl")
     print("\n✅ Model đã train và lưu thành công!")
