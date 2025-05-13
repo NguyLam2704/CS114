@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder, StandardScaler, PolynomialFeatures
 from sklearn.feature_selection import mutual_info_classif
 import pickle
-def preprocess_data(df, target_column='Target', top_k_features=5, random_state=42):
+def preprocess_data(df, target_column='Target', top_k_features=16, random_state=42):
     # Bước 1: Loại bỏ các dòng thiếu target
     df = df.dropna(subset=[target_column])
     
