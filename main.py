@@ -18,8 +18,8 @@ if __name__ == "__main__":
     print("\n✅ Tiền xử lý hoàn tất. Dữ liệu đã sẵn sàng để huấn luyện!")
 
     # --- Bước 2: Train model ---
-    print("\n🔵 Đang train model với ElasticNet Logistic Regression...")
-    model = train_model(X_final_scaled, y_processed)
+    # print("\n🔵 Đang train model với ElasticNet Logistic Regression...")
+    # model = train_model(X_final_scaled, y_processed)
     
     print("\n🔵 Đang train model với Softmax Regression...")
     model_softmax = train_model_softmax(X_final_scaled, y_processed)
@@ -30,9 +30,9 @@ if __name__ == "__main__":
     print("\n🔵 Đang train model với KNN (thư viện)...")
     model_knn_lib = train_model_knn_lib(X_final_scaled, y_processed)
     print("\n🔵 Đang train model với KNN...")
-    model_knn = train_model_knn(X_final_scaled, y_processed)
+    # model_knn = train_model_knn(X_final_scaled, y_processed)
     # --- Bước 3: Lưu model ---
-    save_model(model, 'saved_models/elasticnet_model.pkl')
+    # save_model(model, 'saved_models/elasticnet_model.pkl')
     save_model(model_softmax, 'saved_models/softmax_model.pkl')
     save_model(model_softmax_lib, 'saved_models/softmax_lib_model.pkl')
 

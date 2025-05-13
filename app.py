@@ -48,7 +48,7 @@ def predict():
             "bacteria_in_urine",
             "random_blood_glucose_level",
             "sodium_level",
-            "serum_creatinine"
+            "serum_creatinine",
             "specific_gravity_of_urine"
         ]
         
@@ -78,7 +78,7 @@ def predict():
                 'Coronary artery disease (yes/no)', 
                 'Diabetes mellitus (yes/no)', 
                 'Packed cell volume (%)', 
-                'Physical activity level_moderate', 
+                'Physical activity level', 
                 'Family history of chronic kidney disease',
                 'Urinary sediment microscopy results',
                 'Body Mass Index (BMI)',
@@ -90,7 +90,6 @@ def predict():
                 'Sodium level (mEq/L)',
                 'Serum creatinine (mg/dl)',
                 'Specific gravity of urine',
-                ''
                 ]
             )
         # Tiền xử lý dữ liệu

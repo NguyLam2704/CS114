@@ -1,4 +1,4 @@
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report, confusion_matrix, precision_score, recall_score, f1_score
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 class KnnLibModel:
@@ -16,6 +16,15 @@ class KnnLibModel:
         print(classification_report(y_test, y_pred))
         print("=== KNN Confusion Matrix ===")
         print(confusion_matrix(y_test, y_pred))
+
+            # Precision, Recall, F1-score tổng thể (macro, micro, weighted đều có thể)
+        precision = precision_score(y_test, y_pred, average='weighted')
+        recall = recall_score(y_test, y_pred, average='weighted')
+        f1 = f1_score(y_test, y_pred, average='weighted')
+
+        print(f"Weighted Precision: {precision:.4f}")
+        print(f"Weighted Recall:    {recall:.4f}")
+        print(f"Weighted F1-score:  {f1:.4f}")
         return self.model
         
   def predict(self, X_new):
