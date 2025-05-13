@@ -39,7 +39,17 @@ def predict():
             "diabetes_mellitus",
             "packed_cell_volume",
             "physical_activity_level",
-            "family_history_of_chronic_kidney_disease"
+            "family_history_of_chronic_kidney_disease",
+            "urinary_sediment_microscopy_results",
+            "bmi",
+            "smoking_status",
+            "sugar_in_urine",
+            "duration_of_hypertension",
+            "bacteria_in_urine",
+            "random_blood_glucose_level",
+            "sodium_level",
+            "serum_creatinine"
+            "specific_gravity_of_urine"
         ]
         
         for field in required_fields:
@@ -52,14 +62,35 @@ def predict():
                 data.get("diabetes_mellitus"), 
                 float(data.get("packed_cell_volume")), 
                 data.get("physical_activity_level"), 
-                data.get("family_history_of_chronic_kidney_disease")
+                data.get("family_history_of_chronic_kidney_disease"),
+                data.get("urinary_sediment_microscopy_results"),
+                float(data.get("bmi")),
+                data.get("smoking_status"),
+                float(data.get("sugar_in_urine")),
+                float(data.get("duration_of_hypertension")),
+                data.get("bacteria_in_urine"),
+                float(data.get("random_blood_glucose_level")),
+                float(data.get("sodium_level")),
+                float(data.get("serum_creatinine")),
+                float(data.get("specific_gravity_of_urine"))
             ]], 
             columns=[
                 'Coronary artery disease (yes/no)', 
                 'Diabetes mellitus (yes/no)', 
                 'Packed cell volume (%)', 
                 'Physical activity level_moderate', 
-                'Family history of chronic kidney disease'
+                'Family history of chronic kidney disease',
+                'Urinary sediment microscopy results',
+                'Body Mass Index (BMI)',
+                'Smoking status',
+                'Sugar in urine',
+                'Duration of hypertension (years)',
+                'Bacteria in urine',
+                'Random blood glucose level (mg/dl)',
+                'Sodium level (mEq/L)',
+                'Serum creatinine (mg/dl)',
+                'Specific gravity of urine',
+                ''
                 ]
             )
         # Tiền xử lý dữ liệu
