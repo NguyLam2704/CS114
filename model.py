@@ -9,6 +9,8 @@ from models.softmax_model import SoftmaxRegression
 from sklearn.model_selection import train_test_split
 import os
 from models.softmax_lib_model import SoftmaxLibModel
+from models.knn_lib_model import KnnLibModel
+from models.knn_model import KnnModel
 from models.randomforest_model import *
 from sklearn.ensemble import RandomForestClassifier
 from models.knn_lib_model import KnnLibModel
