@@ -9,6 +9,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
@@ -45,16 +52,80 @@ export function DemographicsSection({
 
           <FormField
             control={form.control}
-            name="bloodPressure"
+            name="bodyMassIndex"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Blood Pressure</FormLabel>
+                <FormLabel>Body Mass Index (BMI)</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. 120/80" {...field} />
+                  <Input placeholder="e.g. 21" {...field} />
                 </FormControl>
                 <FormDescription>
                   Format: systolic/diastolic (mmHg)
                 </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="smokingStatus"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Smoking Status</FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="yes">Yes</SelectItem>
+                      <SelectItem value="no">No</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormDescription>
+                  Select "Yes" if you are a current smoker, or "No" if not.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="physicalActivity"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Physical Activity Level</FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="low">Low</SelectItem>
+                      <SelectItem value="moderate">Moderate</SelectItem>
+                      <SelectItem value="high">High</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormDescription>
+                  Select your level of physical activity. <br />
+                  <strong>Low:</strong> Little or no physical activity (less
+                  than 30 minutes per week). <br />
+                  <strong>Moderate:</strong> Moderate physical activity (around
+                  30–150 minutes per week). <br />
+                  <strong>High:</strong> High or vigorous physical activity
+                  (more than 150 minutes per week).
+                </FormDescription>
+
                 <FormMessage />
               </FormItem>
             )}

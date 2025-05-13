@@ -53,32 +53,34 @@ export default function AssessmentPage() {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      // Demographics
       age: "",
-      bloodPressure: "",
-      specificGravity: "",
-      // albumin: "",
+      bodyMassIndex: "",
+      smokingStatus: "",
+      physicalActivity: "",
+
+      // Urine Analysis
+      sediment: "",
       sugar: "",
-      // redBloodCells: "",
-      // pusCell: "",
-      // pusCellClumps: "",
-      // bacteria: "",
-      bloodGlucoseRandom: "",
-      // bloodUrea: "",
-      // serumCreatinine: "",
-      // sodium: "",
-      // potassium: "",
-      hemoglobin: "",
+      bacteria: "",
+      specificGravity: "",
+
+      // Blood Tests
+      randomBloodGlucose: "",
+      serumCreatinine: "",
+      sodium: "",
       packedCellVolume: "",
-      // whiteBloodCellCount: "",
-      // redBloodCellCount: "",
-      // hypertension: "",
+
+      // Medical History
       diabetesMellitus: "",
       coronaryArteryDisease: "",
+      familyHistory: "",
+      hypertension: "",
+
+      // Symptoms
       appetite: "",
       pedalEdema: "",
       anemia: "",
-      physicalActivity: "",
-      familyHistory: "",
     },
   });
 
@@ -96,6 +98,16 @@ export default function AssessmentPage() {
           packed_cell_volume: Number(values.packedCellVolume),
           physical_activity_level: values.physicalActivity,
           family_history_of_chronic_kidney_disease: values.familyHistory,
+          urinary_sediment_microscopy_results: values.sediment,
+          bmi: Number(values.bodyMassIndex),
+          smoking_status: values.smokingStatus,
+          sugar_in_urine: Number(values.sugar),
+          duration_of_hypertension: Number(values.hypertension),
+          bacteria_in_urine: values.bacteria,
+          random_blood_glucose_level: Number(values.randomBloodGlucose),
+          sodium_level: Number(values.sodium),
+          serum_creatinine: Number(values.serumCreatinine),
+          specific_gravity_of_urine: Number(values.specificGravity),
         }),
       });
 
@@ -106,29 +118,13 @@ export default function AssessmentPage() {
       const data = await response.json();
       console.log("Prediction result:", data);
 
-      // For testing purposes, you can randomize the result
-      // const results = ["No_Disease", "Low_Risk", "Moderate_Risk", "HighRisk"];
-      // const randomResult = results[Math.floor(Math.random() * results.length)];
-      // setPredictionResult(randomResult as any);
-
       // Set the actual prediction result
       setPredictionResult(data.prediction);
 
       // Show the result dialog
       setIsResultDialogOpen(true);
-
-      // Also show a toast notification
-      // toast({
-      //   title: "Assessment Complete",
-      //   description: "View the detailed results in the dialog",
-      // });
     } catch (error) {
       console.error("Error submitting form:", error);
-      // toast({
-      //   variant: "destructive",
-      //   title: "Submission Failed",
-      //   description: "Failed to submit form. Please try again.",
-      // });
     } finally {
       setIsSubmitting(false);
     }
@@ -150,6 +146,8 @@ export default function AssessmentPage() {
 
   const closeResultDialog = () => {
     setIsResultDialogOpen(false);
+    // Reset the prediction result when closing the dialog
+    setPredictionResult(null);
   };
 
   return (

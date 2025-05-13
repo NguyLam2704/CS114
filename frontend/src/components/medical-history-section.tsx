@@ -7,6 +7,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import {
   Select,
@@ -19,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import type { UseFormReturn } from "react-hook-form";
 import type { FormValues } from "@/types/form-types";
+import { Input } from "@/components/ui/input";
 
 interface MedicalHistorySectionProps {
   form: UseFormReturn<FormValues>;
@@ -33,30 +35,23 @@ export function MedicalHistorySection({
     <div>
       <CardContent className="space-y-4 pt-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* <FormField
+          <FormField
             control={form.control}
             name="hypertension"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Hypertension</FormLabel>
+                <FormLabel>Duration of hypertension (years)</FormLabel>
                 <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="yes">Yes</SelectItem>
-                      <SelectItem value="no">No</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Input placeholder="Enter years" {...field} />
                 </FormControl>
+                <FormDescription>
+                  Please enter the number of years the patient has been
+                  diagnosed with hypertension.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
-          /> */}
+          />
 
           {/* Required */}
           <FormField
@@ -79,6 +74,10 @@ export function MedicalHistorySection({
                     </SelectContent>
                   </Select>
                 </FormControl>
+                <FormDescription>
+                  Select "Yes" if you have been diagnosed with diabetes, or "No"
+                  if not.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -105,6 +104,10 @@ export function MedicalHistorySection({
                     </SelectContent>
                   </Select>
                 </FormControl>
+                <FormDescription>
+                  Select "Yes" if you have a history of coronary artery disease,
+                  or "No" if not.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -131,33 +134,10 @@ export function MedicalHistorySection({
                     </SelectContent>
                   </Select>
                 </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Required */}
-          <FormField
-            control={form.control}
-            name="physicalActivity"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Physical Activity Level</FormLabel>
-                <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="low">Low</SelectItem>
-                      <SelectItem value="moderate">Moderate</SelectItem>
-                      <SelectItem value="high">High</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
+                <FormDescription>
+                  Select "Yes" if any of your family members have had kidney
+                  disease, or "No" if none have.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}

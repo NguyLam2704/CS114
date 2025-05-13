@@ -23,7 +23,7 @@ def load_data(X_path, y_path):
     return X, y
 
 
-def train_model(X, y):
+def train_model_elasticnet(X, y):
     # Chia tập train/test
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42, stratify=y
@@ -138,6 +138,8 @@ def train_model_knn_lib(X, y):
 
 def train_model_knn(X, y):
 
+    X =X.values
+    y = y.values
     # Tách dữ liệu
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42, stratify=y
@@ -157,7 +159,7 @@ def train_model_knn(X, y):
     return model
 
 
-def train_model_lib_RandomForest(X, y):
+def train_model_lib_random_forest(X, y):
 
     # Tách dữ liệu
     X_train, X_test, y_train, y_test = train_test_split(
@@ -180,7 +182,7 @@ def train_model_lib_RandomForest(X, y):
     return model
 
 
-def train_model_RandomForest(X, y):
+def train_model_random_forest(X, y):
 
     # Tách dữ liệu
     X_train, X_test, y_train, y_test = train_test_split(
@@ -205,10 +207,10 @@ def train_model_RandomForest(X, y):
 
 if __name__ == "__main__":
     # Load dữ liệu đã xử lý
-    X, y = load_data("X_final_scaled.csv", "y_processed.csv")
+    X, y = load_data("data/X_final_scaled.csv", "data/y_processed.csv")
 
-    # Train model
-    model = train_model(X, y)
+    # Train model ElasticNet
+    model = train_model_elasticnet(X, y)
 
     # Train model Softmax
     model_softmax = train_model_softmax(X, y)
@@ -223,10 +225,10 @@ if __name__ == "__main__":
     model_knn = train_model_knn(X, y)
 
     # Train model Random Forest
-    model_randomforest = train_model_RandomForest(X, y)
+    model_randomforest = train_model_random_forest(X, y)
 
     # Train model Random Forest với thư viện
-    model_randomforest_lib = train_model_lib_RandomForest(X, y)
+    model_randomforest_lib = train_model_lib_random_forest(X, y)
 
     # Lưu model
     save_model(model, "saved_models/elasticnet_model.pkl")

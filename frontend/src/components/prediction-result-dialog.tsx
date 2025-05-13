@@ -101,7 +101,7 @@ export function PredictionResultDialog({
   const config = getRiskConfig(prediction);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent
         className={`sm:max-w-md ${config.bgColor} border-2 ${config.borderColor} p-0 overflow-hidden`}
       >
@@ -146,14 +146,11 @@ export function PredictionResultDialog({
           </div>
 
           <div className="flex justify-between gap-4">
-            <Button variant="outline" onClick={handleClose} className="flex-1">
-              Close
-            </Button>
             <Button
               onClick={handleClose}
               className={`flex-1 ${config.actionColor}`}
             >
-              View Full Report
+              Close
             </Button>
           </div>
         </div>
