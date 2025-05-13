@@ -47,52 +47,39 @@ export default function AssessmentPage() {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      // Demographics
       age: "",
-      bloodPressure: "",
-      specificGravity: "",
+      bodyMassIndex: "",
+      smokingStatus: "",
+      physicalActivity: "",
+
+      // Urine Analysis
+      sediment: "",
       sugar: "",
-      // redBloodCells: "",
-      // pusCell: "",
-      // pusCellClumps: "",
-      // bacteria: "",
-      bloodGlucoseRandom: "",
-      // bloodUrea: "",
-      // serumCreatinine: "",
-      // sodium: "",
-      // potassium: "",
-      hemoglobin: "",
+      bacteria: "",
+      specificGravity: "",
+
+      // Blood Tests
+      randomBloodGlucose: "",
+      serumCreatinine: "",
+      sodium: "",
       packedCellVolume: "",
-      // whiteBloodCellCount: "",
-      // redBloodCellCount: "",
-      // hypertension: "",
+
+      // Medical History
       diabetesMellitus: "",
       coronaryArteryDisease: "",
+      familyHistory: "",
+      hypertension: "",
+
+      // Symptoms
       appetite: "",
       pedalEdema: "",
       anemia: "",
-      physicalActivity: "",
-      familyHistory: "",
     },
   });
 
   function onSubmit() {
     setIsSubmitting(true);
-
-    // Simulate API call
-    // setTimeout(() => {
-    //   console.log("Form Data Submitted:", values);
-    //   // Add logic to send data to the backend for prediction
-
-    //   toast.success("Analysis completed successfully!", {
-    //     description: "Patient data has been processed and prediction is ready.",
-    //     action: {
-    //       label: "View Results",
-    //       onClick: () => console.log("View results clicked"),
-    //     },
-    //   });
-
-    //   setIsSubmitting(false);
-    // }, 2000);
   }
 
   const handleTabChange = (value: string) => {

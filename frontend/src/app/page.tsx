@@ -53,32 +53,34 @@ export default function AssessmentPage() {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      // Demographics
       age: "",
-      bloodPressure: "",
-      specificGravity: "",
-      // albumin: "",
+      bodyMassIndex: "",
+      smokingStatus: "",
+      physicalActivity: "",
+
+      // Urine Analysis
+      sediment: "",
       sugar: "",
-      // redBloodCells: "",
-      // pusCell: "",
-      // pusCellClumps: "",
-      // bacteria: "",
-      bloodGlucoseRandom: "",
-      // bloodUrea: "",
-      // serumCreatinine: "",
-      // sodium: "",
-      // potassium: "",
-      hemoglobin: "",
+      bacteria: "",
+      specificGravity: "",
+
+      // Blood Tests
+      randomBloodGlucose: "",
+      serumCreatinine: "",
+      sodium: "",
       packedCellVolume: "",
-      // whiteBloodCellCount: "",
-      // redBloodCellCount: "",
-      // hypertension: "",
+
+      // Medical History
       diabetesMellitus: "",
       coronaryArteryDisease: "",
+      familyHistory: "",
+      hypertension: "",
+
+      // Symptoms
       appetite: "",
       pedalEdema: "",
       anemia: "",
-      physicalActivity: "",
-      familyHistory: "",
     },
   });
 

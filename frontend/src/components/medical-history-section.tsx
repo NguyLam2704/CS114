@@ -34,7 +34,7 @@ export function MedicalHistorySection({
     <div>
       <CardContent className="space-y-4 pt-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* <FormField
+          <FormField
             control={form.control}
             name="hypertension"
             render={({ field }) => (
@@ -54,10 +54,14 @@ export function MedicalHistorySection({
                     </SelectContent>
                   </Select>
                 </FormControl>
+                <FormDescription>
+                  Select "Yes" if you have been diagnosed with hypertension, or
+                  "No" if not.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
-          /> */}
+          />
 
           {/* Required */}
           <FormField
@@ -144,43 +148,6 @@ export function MedicalHistorySection({
                   Select "Yes" if any of your family members have had kidney
                   disease, or "No" if none have.
                 </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Required */}
-          <FormField
-            control={form.control}
-            name="physicalActivity"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Physical Activity Level</FormLabel>
-                <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="low">Low</SelectItem>
-                      <SelectItem value="moderate">Moderate</SelectItem>
-                      <SelectItem value="high">High</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormDescription>
-                  Select your level of physical activity. <br />
-                  <strong>Low:</strong> Little or no physical activity (less
-                  than 30 minutes per week). <br />
-                  <strong>Moderate:</strong> Moderate physical activity (around
-                  30–150 minutes per week). <br />
-                  <strong>High:</strong> High or vigorous physical activity
-                  (more than 150 minutes per week).
-                </FormDescription>
-
                 <FormMessage />
               </FormItem>
             )}

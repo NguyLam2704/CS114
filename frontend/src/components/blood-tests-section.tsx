@@ -27,7 +27,7 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField
             control={form.control}
-            name="bloodGlucoseRandom"
+            name="randomBloodGlucose"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Blood Glucose Random</FormLabel>
@@ -37,29 +37,14 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
                 <FormDescription>
                   Blood glucose level measured at any random time in mg/dL.{" "}
                   <br />
-                  Range: <strong>70–500 mg/dL</strong>.
+                  Normal Range: <strong>70–500 mg/dL</strong>.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          {/* <FormField
-            control={form.control}
-            name="bloodUrea"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Blood Urea</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter value" {...field} />
-                </FormControl>
-                <FormDescription>In mg/dL</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
-
-          {/* <FormField
+          <FormField
             control={form.control}
             name="serumCreatinine"
             render={({ field }) => (
@@ -72,9 +57,9 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
                 <FormMessage />
               </FormItem>
             )}
-          /> */}
+          />
 
-          {/* <FormField
+          <FormField
             control={form.control}
             name="sodium"
             render={({ field }) => (
@@ -84,39 +69,6 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
                   <Input placeholder="Enter value" {...field} />
                 </FormControl>
                 <FormDescription>In mEq/L</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
-
-          {/* <FormField
-            control={form.control}
-            name="potassium"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Potassium</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter value" {...field} />
-                </FormControl>
-                <FormDescription>In mEq/L</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
-
-          <FormField
-            control={form.control}
-            name="hemoglobin"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Hemoglobin</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter value" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Measured in g/dL. <br />
-                  Range: <strong>6-18 g/dL</strong>.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -134,42 +86,12 @@ export function BloodTestsSection({ form, onNext }: BloodTestsSectionProps) {
                 <FormDescription>
                   A measure of the proportion of blood volume occupied by red
                   blood cells. <br />
-                  Range: <strong>20-55%</strong>.
+                  Range: <strong>0-100%</strong>.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-
-          {/* <FormField
-            control={form.control}
-            name="whiteBloodCellCount"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>White Blood Cell Count</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter value" {...field} />
-                </FormControl>
-                <FormDescription>In cells/cmm</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
-
-          {/* <FormField
-            control={form.control}
-            name="redBloodCellCount"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Red Blood Cell Count</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter value" {...field} />
-                </FormControl>
-                <FormDescription>In millions/cmm</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
         </div>
       </CardContent>
       <div className="flex justify-end p-6 border-t">

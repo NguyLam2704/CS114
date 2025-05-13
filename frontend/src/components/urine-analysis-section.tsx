@@ -14,6 +14,13 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import type { UseFormReturn } from "react-hook-form";
 import type { FormValues } from "@/types/form-types";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface UrineAnalysisSectionProps {
   form: UseFormReturn<FormValues>;
@@ -48,19 +55,36 @@ export function UrineAnalysisSection({
             )}
           />
 
-          {/* <FormField
+          <FormField
             control={form.control}
-            name="albumin"
+            name="sediment"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Albumin</FormLabel>
+                <FormLabel>Urinary sediment microscopy results</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter albumin value" {...field} />
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="normal">Normal</SelectItem>
+                      <SelectItem value="abnormal">Abnormal</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </FormControl>
+                <FormDescription>
+                  Microscopic examination of urine sediment can reveal the
+                  presence of red blood cells, white blood cells, casts, and
+                  crystals. <br />
+                  Range: <strong>Normal / Abnormal</strong>
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
-          /> */}
+          />
 
           <FormField
             control={form.control}
@@ -80,76 +104,7 @@ export function UrineAnalysisSection({
             )}
           />
 
-          {/* <FormField
-            control={form.control}
-            name="redBloodCells"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Red Blood Cells</FormLabel>
-                <FormControl>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="normal">Normal</SelectItem>
-                      <SelectItem value="abnormal">Abnormal</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
-
-          {/* <FormField
-            control={form.control}
-            name="pusCell"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Pus Cell</FormLabel>
-                <FormControl>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="normal">Normal</SelectItem>
-                      <SelectItem value="abnormal">Abnormal</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
-
-          {/* <FormField
-            control={form.control}
-            name="pusCellClumps"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Pus Cell Clumps</FormLabel>
-                <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="present">Present</SelectItem>
-                      <SelectItem value="notPresent">Not Present</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
-
-          {/* <FormField
+          <FormField
             control={form.control}
             name="bacteria"
             render={({ field }) => (
@@ -169,10 +124,15 @@ export function UrineAnalysisSection({
                     </SelectContent>
                   </Select>
                 </FormControl>
+                <FormDescription>
+                  Indicates the presence of bacteria in urine, which may suggest
+                  a urinary tract infection. <br />
+                  Range: <strong>Present / Not Present</strong>
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
-          /> */}
+          />
         </div>
       </CardContent>
       <div className="flex justify-end p-6 border-t">
