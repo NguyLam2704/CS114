@@ -10,20 +10,20 @@ CORS(app)  # Cho phép frontend gọi API
 
 
 def load():
-    model = joblib.load("saved_models/softmax_lib_model.pkl")
-    with open("scaler1.pkl", "rb") as f:
+    model = joblib.load("saved_models/knn_lib_model.pkl")
+    with open("scaler/scaler1.pkl", "rb") as f:
         scaler1 = pickle.load(f)
 
-    with open("scaler2.pkl", "rb") as f:
+    with open("scaler/scaler2.pkl", "rb") as f:
         scaler2 = pickle.load(f)
 
-    with open("poly.pkl", "rb") as f:
+    with open("scaler/poly.pkl", "rb") as f:
         poly = pickle.load(f)
 
-    with open("expected_columns.pkl", "rb") as f:
+    with open("scaler/expected_columns.pkl", "rb") as f:
         expected_columns = pickle.load(f)
 
-    with open("le_target.pkl", "rb") as f:
+    with open("scaler/le_target.pkl", "rb") as f:
         le = pickle.load(f)
     
     return model, scaler1, scaler2 , poly, expected_columns, le

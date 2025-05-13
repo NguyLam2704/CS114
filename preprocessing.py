@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder, StandardScaler, PolynomialFeatures
 from sklearn.feature_selection import mutual_info_classif
 import pickle
-
+import os
 
 def preprocess_data(df, target_column="Target", top_k_features=16, random_state=42):
     # Bước 1: Loại bỏ các dòng thiếu target
@@ -29,9 +29,12 @@ def preprocess_data(df, target_column="Target", top_k_features=16, random_state=
     )
 
     top_features = mi_series.head(top_k_features).index.tolist()
+    
+    # Tạo thư mục 'models' nếu chưa tồn tại
+    os.makedirs("scaler", exist_ok=True)
 
     # Save expected columns
-    with open("expected_columns.pkl", "wb") as f:
+    with open("scaler/expected_columns.pkl", "wb") as f:
         pickle.dump(top_features, f)
 
     # Bước 6: Chuẩn hóa các đặc trưng
@@ -39,7 +42,7 @@ def preprocess_data(df, target_column="Target", top_k_features=16, random_state=
     scaler = StandardScaler()
     X_scaled = pd.DataFrame(scaler.fit_transform(X_encoded), columns=X_encoded.columns)
 
-    with open("scaler1.pkl", "wb") as f:
+    with open("scaler/scaler1.pkl", "wb") as f:
         pickle.dump(scaler, f)
     # Bước 7: Tạo các đặc trưng tương tác
     X_selected = X_scaled[top_features]
@@ -59,21 +62,14 @@ def preprocess_data(df, target_column="Target", top_k_features=16, random_state=
     X_final_scaled = pd.DataFrame(
         scaler.fit_transform(X_processed), columns=X_processed.columns
     )
-
-    with open("scaler2.pkl", "wb") as f:
+    
+    with open("scaler/scaler2.pkl", "wb") as f:
         pickle.dump(scaler, f)
 
-    with open("poly.pkl", "wb") as f:
+    with open("scaler/poly.pkl", "wb") as f:
         pickle.dump(poly, f)
 
-    with open("le_target.pkl", "wb") as f:
+    with open("scaler/le_target.pkl", "wb") as f:
         pickle.dump(le_target, f)
     return X_final_scaled, y
 
-
-# Nếu muốn test nhanh:
-if __name__ == "__main__":
-    df = pd.read_csv("your_dataset.csv")  # thay file CSV của bạn vào đây
-    X_final, y_final = preprocess_data(df)
-    print(X_final.shape)
-    print(y_final.shape)
