@@ -101,7 +101,7 @@ export function PredictionResultDialog({
   const config = getRiskConfig(prediction);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent
         className={`sm:max-w-md ${config.bgColor} border-2 ${config.borderColor} p-0 overflow-hidden`}
       >

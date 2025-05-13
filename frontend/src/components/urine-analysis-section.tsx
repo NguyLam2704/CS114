@@ -120,7 +120,7 @@ export function UrineAnalysisSection({
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="present">Present</SelectItem>
-                      <SelectItem value="notPresent">Not Present</SelectItem>
+                      <SelectItem value="not present">Not Present</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormControl>

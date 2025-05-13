@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import type { UseFormReturn } from "react-hook-form";
 import type { FormValues } from "@/types/form-types";
+import { Input } from "@/components/ui/input";
 
 interface MedicalHistorySectionProps {
   form: UseFormReturn<FormValues>;
@@ -39,24 +40,13 @@ export function MedicalHistorySection({
             name="hypertension"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Hypertension</FormLabel>
+                <FormLabel>Duration of hypertension (years)</FormLabel>
                 <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="yes">Yes</SelectItem>
-                      <SelectItem value="no">No</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Input placeholder="Enter years" {...field} />
                 </FormControl>
                 <FormDescription>
-                  Select "Yes" if you have been diagnosed with hypertension, or
-                  "No" if not.
+                  Please enter the number of years the patient has been
+                  diagnosed with hypertension.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
