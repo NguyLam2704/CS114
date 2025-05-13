@@ -95,9 +95,19 @@ export default function AssessmentPage() {
         body: JSON.stringify({
           coronary_artery_disease: values.coronaryArteryDisease,
           diabetes_mellitus: values.diabetesMellitus,
-          packed_cell_volume: Number(values.packedCellVolume),
+          packed_cell_volume: values.packedCellVolume,
           physical_activity_level: values.physicalActivity,
           family_history_of_chronic_kidney_disease: values.familyHistory,
+          urinary_sediment_microscopy_results: values.sediment,
+          bmi: values.bodyMassIndex,
+          smoking_status: values.smokingStatus,
+          sugar_in_urine: values.sugar,
+          duration_of_hypertension: values.hypertension,
+          bacteria_in_urine: values.bacteria,
+          random_blood_glucose_level: values.randomBloodGlucose,
+          sodium_level: values.sodium,
+          serum_creatinine: values.serumCreatinine,
+          specific_gravity_of_urine: values.specificGravity,
         }),
       });
 
